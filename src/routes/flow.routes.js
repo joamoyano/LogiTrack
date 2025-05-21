@@ -5,4 +5,7 @@ const { createFlow } = require("../controllers/flow.controller");
 
 router.post("/", verifyToken, createFlow); // Ruta protegida
 
+const stepRoutes = require("./step.routes");
+router.use("/:flowId/steps", stepRoutes);
+
 module.exports = router;
