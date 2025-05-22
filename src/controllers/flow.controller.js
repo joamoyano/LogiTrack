@@ -1,4 +1,7 @@
-const { createFlowService } = require("../services/flow.service");
+const {
+  createFlowService,
+  getUserFlowsService,
+} = require("../services/flow.service");
 
 const createFlow = async (req, res) => {
   try {
@@ -12,4 +15,17 @@ const createFlow = async (req, res) => {
   }
 };
 
-module.exports = { createFlow };
+const getUserFlows = async (req, res) => {
+  try {
+    const userId = req.user.userId;
+    const flows = await getUserFlowsService(userId);
+    res.json(flows);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+module.exports = {
+  createFlow,
+  getUserFlows,
+};

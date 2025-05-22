@@ -15,4 +15,24 @@ const createFlowService = async ({ userId, name, description }) => {
   return newFlow;
 };
 
-module.exports = { createFlowService };
+const getUserFlowsService = async (userId) => {
+  const flows = await prisma.flow.findMany({
+    where: { createdById: userId },
+    select: {
+      id: true,
+      name: true,
+      description: true,
+      createdAt: true,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+
+  return flows;
+};
+
+module.exports = {
+  createFlowService,
+  getUserFlowsService,
+};

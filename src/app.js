@@ -23,4 +23,7 @@ app.use("/api/user", userRoutes);
 const flowRoutes = require("./routes/flow.routes");
 app.use("/api/flows", flowRoutes);
 
+const executionRoutes = require("./routes/execution.routes");
+app.use("/api/executions", executionRoutes);
+
 module.exports = app;
